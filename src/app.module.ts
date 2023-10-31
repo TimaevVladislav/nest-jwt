@@ -12,8 +12,8 @@ import {SequelizeModule} from "@nestjs/sequelize"
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: 'root',
-      database: 'secret',
+      password: 'secret',
+      database: 'nest-jwt',
       models: [],
       autoLoadModels: true
     })
