@@ -25,5 +25,5 @@ export class User extends Model<User, UserCreationAttrs> {
   reason: string
 
   @BelongsToMany(() => Roles, () => UserRoles)
-  users: User[]
+  roles: Roles[]
 }
