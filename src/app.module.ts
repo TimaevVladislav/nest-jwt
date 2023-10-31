@@ -8,6 +8,7 @@ import {UsersModule} from "./users/users.module"
 import {RolesModule} from "./roles/roles.module"
 
 import {User} from "./users/users.model"
+import {Roles} from "./roles/roles.model"
 
 
 @Module({
@@ -22,7 +23,7 @@ import {User} from "./users/users.model"
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DATABASE,
-      models: [User],
+      models: [User, Roles],
       autoLoadModels: true
     }),
     UsersModule,
