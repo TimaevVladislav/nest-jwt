@@ -1,5 +1,5 @@
 import {BelongsToMany, Column, DataType, Model, Table} from "sequelize-typescript"
-import {Roles} from "../roles/roles.model"
+import {Role} from "../roles/roles.model"
 
 interface UserCreationAttrs {
   email: string
@@ -24,6 +24,6 @@ export class User extends Model<User, UserCreationAttrs> {
   @Column({type: DataType.BOOLEAN, allowNull: true})
   reason: string
 
-  @BelongsToMany(() => Roles, () => UserRoles)
-  roles: Roles[]
+  @BelongsToMany(() => Role, () => UserRoles)
+  roles: Role[]
 }
