@@ -12,6 +12,7 @@ export class UsersService {
        const user = await this.user.create(dto)
        const role = await this.roleService.getRoleByValue("User")
        await user.$set("roles", [role.id])
+       user.roles = [role]
 
        return user
     }
