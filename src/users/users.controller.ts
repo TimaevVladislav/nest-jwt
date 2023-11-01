@@ -10,13 +10,11 @@ export class UsersController {
 
     @Post()
     createUser(@Body() userDto: CreateDto) {
-      const user = this.usersService.createUserWithDefaultRole(userDto)
-      return user
+      return this.usersService.createUserWithDefaultRole(userDto)
     }
 
     @Get()
     getAllUsers() {
-        const users = this.usersService.getAllUsers()
-        return users
+        return this.usersService.getAllUsers()
     }
 }
