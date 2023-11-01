@@ -1,5 +1,5 @@
 
-export class RegisterDto {
+export class CreateDto {
     readonly email: string
     readonly password: string
 }

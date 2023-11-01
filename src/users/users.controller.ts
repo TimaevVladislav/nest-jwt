@@ -1,7 +1,6 @@
 import {Controller, Post, Get, Body} from "@nestjs/common"
 import {UsersService} from "./users.service"
-import {RegisterDto} from "./dto/register.dto"
-import {ApiOperation} from "@nestjs/swagger";
+import {CreateDto} from "./dto/create.dto"
 
 @Controller("users")
 
@@ -10,12 +9,14 @@ export class UsersController {
     constructor(private usersService: UsersService) {}
 
     @Post()
-    register(@Body() userDto: RegisterDto) {
-      return this.usersService.register(userDto)
+    createUser(@Body() userDto: CreateDto) {
+      const user = this.usersService.createUserWithDefaultRole(userDto)
+      return user
     }
 
     @Get()
     getAllUsers() {
-        return this.usersService.getAllUsers()
+        const users = this.usersService.getAllUsers()
+        return users
     }
 }
