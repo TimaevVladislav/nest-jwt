@@ -5,7 +5,7 @@ import {InjectModel} from "@nestjs/sequelize"
 import {Role} from "./roles.model"
 
 @Injectable()
-export class RolesService {
+export class RoleService {
 
         constructor(@InjectModel(Role) private role: typeof Role) {}
 
@@ -14,10 +14,13 @@ export class RolesService {
              return role
         }
 
-        async getAllRoles() {}
+        async getAllRoles() {
+            const roles = await this.role.findAll()
+            return roles
+        }
 
-        async getRoleByValue(value: string) {
-              const role = await this.role.findOne({where: {value}})
-              return role
+        async getRoleByValue(role: string) {
+              const value = await this.role.findOne({where: {role}})
+              return value
         }
 }
