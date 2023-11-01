@@ -20,4 +20,9 @@ export class UsersService {
         const users = await this.user.findAll({include: {all: true}})
         return users
     }
+
+    async getUserByEmail(email: string): Promise<User> {
+        const user = await this.user.findOne({where: {email}, include: {all: true}})
+        return user
+    }
 }
