@@ -14,7 +14,7 @@ export class AuthController {
 
     @Post("/login")
     login(@Body() userDto: CreateDto) {
-
+        return this.auth.login(userDto)
     }
 
     @Post("/logout")
