@@ -2,6 +2,7 @@ import {HttpException, HttpStatus, Injectable} from "@nestjs/common"
 import {InjectModel} from "@nestjs/sequelize"
 import {User} from "./users.model"
 import {CreateDto} from "./dto/create.dto"
+import {AddRoleDto} from "../roles/dto/add.role.dto"
 import {RoleService} from "../roles/roles.service"
 
 @Injectable()
