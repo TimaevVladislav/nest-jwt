@@ -1,9 +1,11 @@
 import {HttpException, HttpStatus, Injectable} from "@nestjs/common"
 import {InjectModel} from "@nestjs/sequelize"
 import {User} from "./users.model"
-import {CreateUserDto} from "./dto/create.user.dto"
-import {AddRoleDto} from "../roles/dto/add.role.dto"
 import {RoleService} from "../roles/roles.service"
+
+import {CreateUserDto} from "./dto/create.user.dto"
+import {BanUserDto} from "./dto/ban.user.dto"
+import {AddRoleDto} from "../roles/dto/add.role.dto"
 
 @Injectable()
 export class UsersService {
@@ -30,8 +32,16 @@ export class UsersService {
         throw new HttpException("User or role not found", HttpStatus.NOT_FOUND)
     }
 
-    async banUser(id: number) {
+    async banUser(dto: BanUserDto): Promise<User> {
+        const user = await this.user.findByPk(dto.userId)
 
+        if (!user) {
+            throw new HttpException("User not found", HttpStatus.NOT_FOUND)
+        }
+
+        user.blocked = true
+        user.reason = dto.reason
+        return await user.save()
     }
 
     async getAllUsers(): Promise<User[]> {

@@ -23,7 +23,7 @@ export class User extends Model<User, UserCreationAttrs> {
   @Column({type: DataType.BOOLEAN, defaultValue: false})
   blocked: boolean
 
-  @Column({type: DataType.BOOLEAN, allowNull: true})
+  @Column({type: DataType.STRING, allowNull: true})
   reason: string
 
   @BelongsToMany(() => Role, () => UserRoles)
