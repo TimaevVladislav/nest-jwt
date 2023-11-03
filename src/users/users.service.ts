@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common"
+import {HttpException, HttpStatus, Injectable} from "@nestjs/common"
 import {InjectModel} from "@nestjs/sequelize"
 import {User} from "./users.model"
 import {CreateDto} from "./dto/create.dto"
@@ -15,6 +15,18 @@ export class UsersService {
        user.roles = [role]
 
        return user
+    }
+
+    async addUserRole(dto: AddRoleDto) {
+        const user = await this.user.findByPk(dto.userId)
+        const role = await this.roleService.getRoleByValue(dto.role)
+
+        if (role && user) {
+            await user.$add("role", role.id)
+            return dto
+        }
+
+        throw new HttpException("User or role not found", HttpStatus.NOT_FOUND)
     }
 
     async getAllUsers(): Promise<User[]> {

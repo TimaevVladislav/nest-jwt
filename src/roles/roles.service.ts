@@ -1,8 +1,9 @@
-import { Injectable } from "@nestjs/common"
+import {HttpException, HttpStatus, Injectable} from "@nestjs/common"
 import {RoleDto} from "./dto/role.dto"
 
 import {InjectModel} from "@nestjs/sequelize"
 import {Role} from "./roles.model"
+import {User} from "../users/users.model"
 
 @Injectable()
 export class RoleService {
@@ -10,8 +11,8 @@ export class RoleService {
         constructor(@InjectModel(Role) private role: typeof Role) {}
 
         async createRole(dto: RoleDto) {
-             const role = await this.role.create(dto)
-             return role
+            const role = await this.role.create(dto)
+            return role
         }
 
         async getAllRoles() {
