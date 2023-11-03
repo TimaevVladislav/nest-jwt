@@ -6,6 +6,7 @@ import {RoleService} from "../roles/roles.service"
 import {CreateUserDto} from "./dto/create.user.dto"
 import {BanUserDto} from "./dto/ban.user.dto"
 import {AddRoleDto} from "../roles/dto/add.role.dto"
+import {RoleEnum} from "../../enums/role.enum"
 
 @Injectable()
 export class UsersService {
@@ -13,7 +14,7 @@ export class UsersService {
 
     async createUserWithDefaultRole(dto: CreateUserDto) {
        const user = await this.user.create(dto)
-       const role = await this.roleService.getRoleByValue("User")
+       const role = await this.roleService.getRoleByValue(RoleEnum.User)
        await user.$set("roles", [role.id])
        user.roles = [role]
 
