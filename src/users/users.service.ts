@@ -1,7 +1,7 @@
 import {HttpException, HttpStatus, Injectable} from "@nestjs/common"
 import {InjectModel} from "@nestjs/sequelize"
 import {User} from "./users.model"
-import {CreateDto} from "./dto/create.dto"
+import {CreateUserDto} from "./dto/create.user.dto"
 import {AddRoleDto} from "../roles/dto/add.role.dto"
 import {RoleService} from "../roles/roles.service"
 
@@ -9,7 +9,7 @@ import {RoleService} from "../roles/roles.service"
 export class UsersService {
     constructor(@InjectModel(User) private user: typeof User, private roleService: RoleService) {}
 
-    async createUserWithDefaultRole(dto: CreateDto) {
+    async createUserWithDefaultRole(dto: CreateUserDto) {
        const user = await this.user.create(dto)
        const role = await this.roleService.getRoleByValue("User")
        await user.$set("roles", [role.id])
@@ -28,6 +28,10 @@ export class UsersService {
         }
 
         throw new HttpException("User or role not found", HttpStatus.NOT_FOUND)
+    }
+
+    async banUser(id: number) {
+
     }
 
     async getAllUsers(): Promise<User[]> {

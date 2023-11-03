@@ -2,7 +2,7 @@ import * as bcrypt from "bcryptjs"
 import {HttpException, HttpStatus, Injectable} from "@nestjs/common"
 import {UsersService} from "../users/users.service"
 import {JwtService} from "@nestjs/jwt"
-import {CreateDto} from "../users/dto/create.dto"
+import {CreateUserDto} from "../users/dto/create.user.dto"
 import {User} from "../users/users.model"
 
 @Injectable()
@@ -15,7 +15,7 @@ export class AuthService {
        return { token: this.jwt.sign(payload) }
     }
 
-    async registration(userDto: CreateDto): Promise<{ token: string }> {
+    async registration(userDto: CreateUserDto): Promise<{ token: string }> {
        const candidate = await this.users.getUserByEmail(userDto.email)
 
        if (candidate) {
@@ -27,7 +27,7 @@ export class AuthService {
        return this.generateToken(user)
     }
 
-    async login(userDto: CreateDto): Promise<{ token: string }> {
+    async login(userDto: CreateUserDto): Promise<{ token: string }> {
       const user = await this.users.getUserByEmail(userDto.email)
       const passwordEquals = await bcrypt.compare(userDto.password, user.password)
 
