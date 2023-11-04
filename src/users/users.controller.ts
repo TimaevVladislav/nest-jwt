@@ -1,8 +1,8 @@
 import {Controller, Post, Get, Body, UseGuards, UsePipes} from "@nestjs/common"
 import {UsersService} from "./users.service"
 
-import {Roles} from "../decorators/role.auth.decorator"
-import {RolesGuard} from "../guards/role.guard"
+import {Roles} from "../../decorators/role.auth.decorator"
+import {RolesGuard} from "../../guards/role.guard"
 import {ValidationPipe} from "../../pipes/validation.pipe"
 
 import {BanUserDto} from "./dto/ban.user.dto"

@@ -5,7 +5,7 @@ import {SequelizeModule} from "@nestjs/sequelize"
 
 import {User} from "./users.model"
 import {Role} from "../roles/roles.model"
-import {UserRoles} from "../relations/user.roles.model"
+import {UserRoles} from "../../relations/user.roles.model"
 import {RolesModule} from "../roles/roles.module"
 import {AuthModule} from "../auth/auth.module"
 
