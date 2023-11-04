@@ -1,8 +1,9 @@
-import {Controller, Post, Get, Body, UseGuards} from "@nestjs/common"
+import {Controller, Post, Get, Body, UseGuards, UsePipes} from "@nestjs/common"
 import {UsersService} from "./users.service"
 
 import {Roles} from "../decorators/role.auth.decorator"
 import {RolesGuard} from "../guards/role.guard"
+import {ValidationPipe} from "../../pipes/validation.pipe"
 
 import {BanUserDto} from "./dto/ban.user.dto"
 import {CreateUserDto} from "./dto/create.user.dto"
@@ -15,12 +16,14 @@ export class UsersController {
 
     constructor(private usersService: UsersService) {}
 
+    @UsePipes(ValidationPipe)
     @Post()
     createUser(@Body() userDto: CreateUserDto) {
       return this.usersService.createUserWithDefaultRole(userDto)
     }
 
     @Roles("Admin")
+    @UsePipes(ValidationPipe)
     @UseGuards(RolesGuard)
     @Post("/role")
     addUserRole(@Body() dto: AddRoleDto) {
