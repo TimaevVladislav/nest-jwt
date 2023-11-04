@@ -6,17 +6,18 @@ import {ConfigModule} from "@nestjs/config"
 
 import {UsersModule} from "./users/users.module"
 import {RolesModule} from "./roles/roles.module"
+import {FilesModule} from "./files/files.module"
+import {AuthModule} from "./auth/auth.module"
+import {PostsModule} from "./posts/posts.module"
 
-import { AuthController } from "./auth/auth.controller"
-import { AuthModule } from "./auth/auth.module"
-import { PostsController } from './posts/posts.controller'
-import { PostsModule } from "./posts/posts.module"
+
+import {AuthController} from "./auth/auth.controller"
+import {PostsController} from './posts/posts.controller'
 
 import {Post} from "./posts/posts.model"
 import {User} from "./users/users.model"
 import {Role} from "./roles/roles.model"
 import {UserRoles} from "../relations/user.roles.model"
-
 
 @Module({
   controllers: [AuthController, PostsController],
@@ -36,7 +37,8 @@ import {UserRoles} from "../relations/user.roles.model"
     UsersModule,
     RolesModule,
     AuthModule,
-    PostsModule
+    PostsModule,
+    FilesModule
   ]
 })
 
