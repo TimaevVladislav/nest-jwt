@@ -8,6 +8,7 @@ import {ValidationPipe} from "../../pipes/validation.pipe"
 import {BanUserDto} from "./dto/ban.user.dto"
 import {CreateUserDto} from "./dto/create.user.dto"
 import {AddRoleDto} from "../roles/dto/add.role.dto"
+import {RoleEnum} from "../../enums/role.enum"
 
 
 @Controller("users")
@@ -22,7 +23,7 @@ export class UsersController {
       return this.usersService.createUserWithDefaultRole(userDto)
     }
 
-    @Roles("Admin")
+    @Roles(RoleEnum.Admin)
     @UsePipes(ValidationPipe)
     @UseGuards(RolesGuard)
     @Post("/role")
@@ -30,14 +31,14 @@ export class UsersController {
         return this.usersService.addUserRole(dto)
     }
 
-    @Roles("Admin")
+    @Roles(RoleEnum.Admin)
     @UseGuards(RolesGuard)
     @Post("/ban")
     banUser(@Body() dto: BanUserDto) {
         return this.usersService.banUser(dto)
     }
 
-    @Roles("Admin")
+    @Roles(RoleEnum.Admin)
     @UseGuards(RolesGuard)
     @Get()
     getAllUsers() {
