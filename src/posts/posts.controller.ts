@@ -1,4 +1,4 @@
-import {Body, Controller, Post, UploadedFile, UseInterceptors} from "@nestjs/common"
+import {Body, Controller, Get, Post, UploadedFile, UseInterceptors} from "@nestjs/common"
 import {FileInterceptor} from "@nestjs/platform-express"
 import {CreatePostDto} from "./dto/create.post.dto"
 import {PostsService} from "./posts.service"
@@ -11,5 +11,10 @@ export class PostsController {
     @UseInterceptors(FileInterceptor("image"))
     createPost(@Body() dto: CreatePostDto, @UploadedFile() image) {
         return this.postService.createPost(dto, image)
+    }
+
+    @Get()
+    getPosts() {
+        return this.postService.getAllPosts()
     }
 }

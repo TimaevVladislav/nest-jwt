@@ -20,4 +20,13 @@ export class PostsService {
            throw new HttpException("An error occurred while create the post.", HttpStatus.INTERNAL_SERVER_ERROR)
        }
     }
+
+    async getAllPosts(): Promise<Post[]> {
+        try {
+            const posts = await this.posts.findAll()
+            return posts
+        } catch (e) {
+            throw new HttpException("An error occurred while getting the posts.", HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
 }
