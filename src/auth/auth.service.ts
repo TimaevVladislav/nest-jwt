@@ -28,17 +28,17 @@ export class AuthService {
     }
 
     async login(userDto: CreateUserDto): Promise<{ token: string }> {
-      const user = await this.users.getUserByEmail(userDto.email)
-      const passwordEquals = await bcrypt.compare(userDto.password, user.password)
+        const user = await this.users.getUserByEmail(userDto.email)
 
-      if (!user) {
-          throw new HttpException("User with this email does not exist", HttpStatus.BAD_REQUEST)
-      }
+        if (!user) {
+            throw new HttpException("User with this email does not exist", HttpStatus.BAD_REQUEST)
+        }
 
-      if (user && passwordEquals) {
-          return this.generateToken(user)
-      }
+        const passwordEquals = await bcrypt.compare(userDto.password, user.password)
+        if (user && passwordEquals) {
+            return this.generateToken(user)
+        }
 
-      throw new HttpException("Invalid email or password", HttpStatus.BAD_REQUEST)
+        throw new HttpException("Invalid email or password", HttpStatus.BAD_REQUEST)
     }
 }
