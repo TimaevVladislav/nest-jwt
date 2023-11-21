@@ -15,7 +15,7 @@ export class AuthService {
        return { token: this.jwt.sign(payload) }
     }
 
-    async registration(userDto: CreateUserDto): Promise<{ token: string }> {
+    async registration(userDto: CreateUserDto): Promise<{ token: string, message: string}> {
        const candidate = await this.users.getUserByEmail(userDto.email)
 
        if (candidate) {
@@ -24,7 +24,7 @@ export class AuthService {
 
        const hashPassword = await bcrypt.hash(userDto.password, 10)
        const user = await this.users.createUserWithDefaultRole({...userDto, password: hashPassword})
-       return this.generateToken(user)
+       return {...await this.generateToken(user), message: "User has been successfully created"}
     }
 
     async login(userDto: CreateUserDto): Promise<{ token: string }> {
