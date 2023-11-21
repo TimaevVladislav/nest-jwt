@@ -54,4 +54,8 @@ export class UsersService {
         const user = await this.user.findOne({where: {email}, include: {all: true}})
         return user
     }
+
+    async deleteUser() {
+
+    }
 }

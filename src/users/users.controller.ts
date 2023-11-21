@@ -1,4 +1,4 @@
-import {Controller, Post, Get, Body, UseGuards, UsePipes} from "@nestjs/common"
+import {Controller, Post, Get, Body, UseGuards, UsePipes, Delete} from "@nestjs/common"
 import {UsersService} from "./users.service"
 
 import {Roles} from "../../decorators/role.auth.decorator"
@@ -38,10 +38,14 @@ export class UsersController {
         return this.usersService.banUser(dto)
     }
 
-    @Roles(RoleEnum.Admin)
-    @UseGuards(RolesGuard)
+
     @Get()
     getAllUsers() {
         return this.usersService.getAllUsers()
+    }
+
+    @Delete()
+    deleteUser() {
+        return this.usersService.deleteUser()
     }
 }
